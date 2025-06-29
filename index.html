@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>King Sukh Guest House</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'media', // Enable dark mode based on device preference
+      theme: {
+        extend: {
+          colors: {
+            primary: '#e11d48',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Typewriter effect */
+    .typewriter {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid #e11d48;
+      width: 0;
+      animation: typewriter 2s steps(30, end) 0.5s 1 normal both, blinkCaret 0.75s step-end infinite;
+      display: inline-block;
+    }
+    @keyframes typewriter {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blinkCaret {
+      from, to { border-color: transparent }
+      50% { border-color: #e11d48 }
+    }
+    /* Mobile menu animation */
+    #navMenu {
+      transition: all 0.3s ease;
+      max-height: 0;
+      overflow: hidden;
+    }
+    #navMenu.active {
+      max-height: 500px;
+    }
+    /* Smooth animations */
+    .animate-slide-in-left {
+      animation: slideInLeft 0.5s ease-out forwards;
+    }
+    .animate-fade-up {
+      animation: fadeInUp 0.5s ease-out forwards;
+    }
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Dark mode overrides */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #18181b;
+        color: #f3f4f6;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        color: #f3f4f6 !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.01em;
+      }
+      a, .text-blue-600, .text-blue-400 {
+        color: #60a5fa !important;
+      }
+      .text-pink-600, .text-pink-500, .text-pink-400 {
+        color: #fb7185 !important;
+      }
+      .text-gray-900, .text-gray-800, .text-gray-700, .text-gray-600, .text-gray-500, .text-gray-400 {
+        color: #d1d5db !important;
+      }
+      .font-medium, .font-semibold, .font-bold {
+        font-weight: 700 !important;
+      }
+      .typewriter {
+        border-right: 3px solid #fb7185;
+      }
+      input, textarea {
+        background-color: #23272f !important;
+        color: #f3f4f6 !important;
+        border-color: #374151 !important;
+      }
+      ::placeholder {
+        color: #a1a1aa !important;
+        opacity: 1;
+      }
+      .bg-white { background-color: #23272f !important; }
+      .bg-gray-50 { background-color: #18181b !important; }
+      .bg-gray-900 { background-color: #111827 !important; }
+      .shadow-lg, .shadow-2xl, .shadow { box-shadow: 0 2px 16px 0 rgba(0,0,0,0.7) !important; }
+      .border-gray-300 { border-color: #374151 !important; }
+      .border-gray-700 { border-color: #374151 !important; }
+      .bg-gray-100, .bg-gray-200, .bg-gray-300, .bg-gray-400, .bg-gray-500, .bg-gray-600, .bg-gray-800, .bg-gray-900 { background-color: #23272f !important; }
+      .bg-blue-100, .bg-blue-400 { background-color: #1e293b !important; }
+      .bg-purple-100 { background-color: #312e81 !important; }
+      .bg-purple-500 { background-color: #a78bfa !important; }
+      .bg-yellow-100 { background-color: #f59e42 !important; }
+      .bg-red-100 { background-color: #7f1d1d !important; }
+      .bg-green-100 { background-color: #14532d !important; }
+      .bg-pink-100 { background-color: #831843 !important; }
+      .text-white { color: #f3f4f6 !important; }
+      .rounded-3xl, .rounded-2xl, .rounded-xl, .rounded-lg, .rounded-full { border-radius: 1.5rem !important; }
+    }
+    .nav-underline::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: 0.2em;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #e11d48 60%, #fb7185 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+      transform-origin: left;
+      border-radius: 2px;
+    }
+    .nav-underline:hover::after, .nav-underline:focus::after {
+      transform: scaleX(1);
+    }
+    .nav-underline {
+      transition: color 0.2s;
+    }
+    .nav-underline:hover, .nav-underline:focus {
+      color: #e11d48 !important;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-underline::after {
+        background: linear-gradient(90deg, #fb7185 60%, #e11d48 100%);
+      }
+      .nav-underline:hover, .nav-underline:focus {
+        color: #fb7185 !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 w-full z-50 bg-white shadow">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex flex-col">
+        <span class="text-lg font-bold text-gray-800 leading-tight">Kingsukh Guest House</span>
+      </div>
+      <ul class="hidden md:flex space-x-8 text-base font-medium text-gray-700">
+        <li><a href="#home" class="nav-underline block relative py-2">Home</a></li>
+        <li><a href="#about" class="nav-underline block relative py-2">About</a></li>
+        <li><a href="#services" class="nav-underline block relative py-2">Services</a></li>
+        <li><a href="#rooms" class="nav-underline block relative py-2">Rooms</a></li>
+        <li><a href="#gallery" class="nav-underline block relative py-2">Gallery</a></li>
+        <li><a href="#contact" class="nav-underline block relative py-2">Contact</a></li>
+      </ul>
+      <a href="https://wa.link/at5ion" class="hidden md:inline-block bg-pink-500 hover:bg-pink-600 text-white px-7 py-3 rounded-lg font-semibold transition">BOOK NOW</a>
+      <button id="menuBtn" class="md:hidden text-2xl text-gray-800 focus:outline-none ml-4">
+        <i class="ri-menu-line" id="menuIcon"></i>
+      </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="navMenu" class="md:hidden px-4 pb-4 hidden">
+      <ul class="flex flex-col space-y-2 text-base font-medium text-gray-700">
+        <li><a href="#home" class="hover:text-pink-600">Home</a></li>
+        <li><a href="#about" class="hover:text-pink-600">About</a></li>
+        <li><a href="#services" class="hover:text-pink-600">Services</a></li>
+        <li><a href="#rooms" class="hover:text-pink-600">Rooms</a></li>
+        <li><a href="#gallery" class="hover:text-pink-600">Gallery</a></li>
+        <li><a href="#contact" class="hover:text-pink-600">Contact</a></li>
+        <li><a href="https://wa.link/at5ion" class="bg-pink-500 hover:bg-pink-600 text-white px-7 py-3 rounded-lg font-semibold transition block text-center mt-2">BOOK NOW</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header id="home" class="relative bg-cover bg-center h-screen flex items-center justify-center text-white text-center px-4" style="background-image: url('baranti.webp');">
+    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+    <div class="relative z-10 flex flex-col items-center w-full">
+      <div class="mt-32 md:mt-40"></div>
+      <div class="text-lg md:text-xl text-gray-200 mb-2 font-medium">Simple – Unique – Friendly</div>
+      <h1 class="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">
+        Make Yourself At Home<br>
+        In Our <span class="text-pink-500">Guest House</span>.
+      </h1>
+      <a href="https://wa.link/at5ion" class="bg-pink-500 hover:bg-pink-600 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg transition mb-10">BOOK NOW</a>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about" class="pt-28 pb-20 px-4 md:px-16 bg-gray-50">
+    <h2 class="text-4xl font-bold text-pink-600 typewriter mb-8 text-center">About King Sukh Guest House</h2>
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+      <img src="out.jpg" alt="Guest House" class="rounded-xl shadow-lg" />
+      <div>
+        <h3 class="text-2xl font-semibold mb-2 animate-slide-in-left">The Best Holidays Start Here</h3>
+        <p class="text-gray-600 mb-4 animate-fade-up">
+        Enjoy comfort, scenic views, and nature's beauty in one place. Our guest house offers a serene escape with modern amenities and a touch of local charm.Embark on a tranquil journey at our Kingsukh Guest House, enveloped by the scenic allure of Biharinath Hill, Baranti Hill, Susunia Hill, Joychandi Hill, Garhpanchkot, Baranti Dam, Maithon Dam, and the captivating Panchat Dam. Revel in the embrace of comfort, relish delightful meals, and unwind in our verdant garden oasis. Your ideal retreat beckons, promising a harmonious blend of nature's beauty and heartfelt hospitality. Explore the hidden gems of Purulia, creating memories that linger long after your stay
+        </p>
+        <p class="font-medium text-sm mb-6">
+          📍 <a href="https://maps.app.goo.gl/7wYUEB4tvR7NMHbcA" class="text-blue-600 underline">Barshal Water Tank, Manpur, Barhanti</a><br />
+          📞 <a href="tel:+919007062180" class="text-blue-600 underline">+91 9007062180</a>
+        </p>
+        <a href="https://wa.link/at5ion" class="inline-block bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow transition">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rooms -->
+  <section id="rooms" class="pt-28 pb-20 px-4 md:px-16 bg-white">
+    <h2 class="text-4xl font-bold text-pink-600 typewriter mb-8 text-center">Rooms</h2>
+    <div class="text-center mb-12">
+      <p class="text-gray-600 animate-fade-up">Choose from our comfortable, well-equipped rooms</p>
+    </div>
+    <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+      <!-- Room Tile 1 -->
+      <div class="bg-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition p-6 flex flex-col">
+        <img src="small.jpg" alt="Cozy Haven Room" class="rounded-xl mb-4 h-48 w-full object-cover" />
+        <div class="flex-1 flex flex-col">
+          <h3 class="text-xl font-semibold mb-1">Cozy Haven Room</h3>
+          <p class="text-gray-600 text-sm mb-2">Perfect for couples or solo travelers. Enjoy a peaceful stay with all basic amenities.</p>
+          <ul class="text-gray-500 text-xs mb-4 space-y-1">
+            <li><i class="ri-user-line mr-1"></i> 2 Guests</li>
+            <li><i class="ri-hotel-bed-line mr-1"></i> 1 Double Bed</li>
+            <li><i class="ri-wifi-line mr-1"></i> Free Wi-Fi</li>
+            <li><i class="ri-drop-line mr-1"></i> Attached Bathroom</li>
+          </ul>
+          <div class="mt-auto flex items-center justify-between">
+            <span class="text-lg font-bold text-pink-600">₹1000<span class="text-sm text-gray-500 font-normal">/night</span></span>
+            <a href="https://wa.link/at5ion" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full font-semibold transition">Book Now</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Room Tile 2 -->
+      <div class="bg-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition p-6 flex flex-col">
+        <img src="large.jpg" alt="Spacious Serenity Suite" class="rounded-xl mb-4 h-48 w-full object-cover" />
+        <div class="flex-1 flex flex-col">
+          <h3 class="text-xl font-semibold mb-1">Spacious Serenity Suite</h3>
+          <p class="text-gray-600 text-sm mb-2">Ideal for families or groups. Spacious, comfortable, and well-furnished.</p>
+          <ul class="text-gray-500 text-xs mb-4 space-y-1">
+            <li><i class="ri-user-line mr-1"></i> 4 Guests</li>
+            <li><i class="ri-hotel-bed-line mr-1"></i> 2 Double Beds</li>
+            <li><i class="ri-wifi-line mr-1"></i> Free Wi-Fi</li>
+            <li><i class="ri-drop-line mr-1"></i> Attached Bathroom</li>
+          </ul>
+          <div class="mt-auto flex items-center justify-between">
+            <span class="text-lg font-bold text-pink-600">₹1500<span class="text-sm text-gray-500 font-normal">/night</span></span>
+            <a href="https://wa.link/at5ion" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full font-semibold transition">Book Now</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Room Tile 3 -->
+      <div class="bg-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition p-6 flex flex-col">
+        <img src="recep.jpg" alt="Deluxe Family Room" class="rounded-xl mb-4 h-48 w-full object-cover" />
+        <div class="flex-1 flex flex-col">
+          <h3 class="text-xl font-semibold mb-1">Deluxe Family Room</h3>
+          <p class="text-gray-600 text-sm mb-2">Spacious room for families, with extra amenities and comfort.</p>
+          <ul class="text-gray-500 text-xs mb-4 space-y-1">
+            <li><i class="ri-user-line mr-1"></i> 5 Guests</li>
+            <li><i class="ri-hotel-bed-line mr-1"></i> 2 Double Beds + 1 Single</li>
+            <li><i class="ri-wifi-line mr-1"></i> Free Wi-Fi</li>
+            <li><i class="ri-drop-line mr-1"></i> Attached Bathroom</li>
+          </ul>
+          <div class="mt-auto flex items-center justify-between">
+            <span class="text-lg font-bold text-pink-600">₹1800<span class="text-sm text-gray-500 font-normal">/night</span></span>
+            <a href="https://wa.link/at5ion" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full font-semibold transition">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="pt-28 pb-0 relative w-full bg-gray-50 mb-20">
+    <h2 class="text-4xl font-bold text-pink-600 typewriter mb-8 text-center">Gallery</h2>
+    <div class="relative w-full h-[50vh] md:h-[70vh] overflow-hidden">
+      <img id="carouselImage" src="out.jpg" alt="Gallery Slide" class="w-full h-full object-cover transition duration-700" />
+      <!-- Carousel Controls -->
+      <button id="prevBtn" class="absolute left-6 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-800 rounded-full p-4 shadow-lg z-10"><i class="ri-arrow-left-s-line text-3xl"></i></button>
+      <button id="nextBtn" class="absolute right-6 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-800 rounded-full p-4 shadow-lg z-10"><i class="ri-arrow-right-s-line text-3xl"></i></button>
+      <!-- Carousel Dots -->
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex justify-center space-x-3 z-10" id="carouselDots"></div>
+    </div>
+  </section>
+  
+  <!-- Gallery Grid -->
+  <section class="pt-10 pb-20 px-4 md:px-16 bg-gray-50">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <div class="overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105 cursor-pointer gallery-img-modal">
+        <img src="1.jpg" class="w-full h-60 object-cover" alt="Gallery Image" data-img="1.jpg" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105 cursor-pointer gallery-img-modal">
+        <img src="ayodhya.webp" class="w-full h-60 object-cover" alt="Gallery Image" data-img="ayodhya.webp" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105 cursor-pointer gallery-img-modal">
+        <img src="baranti.webp" class="w-full h-60 object-cover" alt="Gallery Image" data-img="baranti.webp" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105 cursor-pointer gallery-img-modal">
+        <img src="flower.jpg" class="w-full h-60 object-cover" alt="Gallery Image" data-img="flower.jpg" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105 cursor-pointer gallery-img-modal">
+        <img src="header.jpg" class="w-full h-60 object-cover" alt="Gallery Image" data-img="header.jpg" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105 cursor-pointer gallery-img-modal">
+        <img src="large.jpg" class="w-full h-60 object-cover" alt="Gallery Image" data-img="large.jpg" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105 cursor-pointer gallery-img-modal">
+        <img src="mithonDam.webp" class="w-full h-60 object-cover" alt="Gallery Image" data-img="mithonDam.webp" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105 cursor-pointer gallery-img-modal">
+        <img src="out.jpg" class="w-full h-60 object-cover" alt="Gallery Image" data-img="out.jpg" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105 cursor-pointer gallery-img-modal">
+        <img src="palash.webp" class="w-full h-60 object-cover" alt="Gallery Image" data-img="palash.webp" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105 cursor-pointer gallery-img-modal">
+        <img src="recep.jpg" class="w-full h-60 object-cover" alt="Gallery Image" data-img="recep.jpg" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105 cursor-pointer gallery-img-modal">
+        <img src="room1.jpg" class="w-full h-60 object-cover" alt="Gallery Image" data-img="room1.jpg" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105 cursor-pointer gallery-img-modal">
+        <img src="service.jpg" class="w-full h-60 object-cover" alt="Gallery Image" data-img="service.jpg" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105 cursor-pointer gallery-img-modal">
+        <img src="small.jpg" class="w-full h-60 object-cover" alt="Gallery Image" data-img="small.jpg" />
+      </div>
+    </div>
+    
+    <!-- Modal for zoom -->
+    <div id="galleryModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+      <div class="relative flex flex-col items-center">
+        <button id="closeGalleryModal" class="absolute top-2 right-2 text-white text-3xl bg-black bg-opacity-40 rounded-full px-3 py-1 hover:bg-opacity-70">&times;</button>
+        <img id="modalImg" src="out.jpg" alt="Zoomed Gallery" class="max-h-[80vh] max-w-[90vw] transition-transform duration-300" style="transform: scale(1);" />
+        <div class="flex gap-4 mt-4">
+          <button id="zoomInBtn" class="bg-white text-pink-600 rounded-full p-3 shadow hover:bg-pink-100 text-2xl"><i class="ri-zoom-in-line"></i></button>
+          <button id="zoomOutBtn" class="bg-white text-pink-600 rounded-full p-3 shadow hover:bg-pink-100 text-2xl"><i class="ri-zoom-out-line"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="pt-28 pb-20 px-4 md:px-16 bg-white">
+    <h2 class="text-4xl font-bold text-pink-600 typewriter mb-8 text-center">Our Services</h2>
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+      <div class="rounded-3xl overflow-hidden shadow-2xl h-full">
+        <img src="palash.webp" alt="Service Highlight" class="w-full h-full object-cover" />
+      </div>
+      <div class="flex flex-col justify-center h-full bg-white rounded-3xl shadow-2xl p-10">
+        <h2 class="text-2xl md:text-4xl font-bold mb-8 leading-tight text-gray-900 break-words" style="word-break:break-word;">Strive Only For The Best</h2>
+        <ul class="space-y-6">
+          <li class="flex items-center gap-4">
+            <span class="bg-blue-100 text-blue-600 rounded-full p-3 text-2xl"><i class="ri-shield-star-line"></i></span>
+            <span class="text-lg font-medium">High Class Security</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="bg-pink-100 text-pink-600 rounded-full p-3 text-2xl"><i class="ri-24-hours-line"></i></span>
+            <span class="text-lg font-medium">24 Hours Room Service</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="bg-purple-100 text-purple-600 rounded-full p-3 text-2xl"><i class="ri-restaurant-2-fill"></i></span>
+            <span class="text-lg font-medium">Restaurant</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="bg-red-100 text-red-600 rounded-full p-3 text-2xl"><i class="ri-map-2-line"></i></span>
+            <span class="text-lg font-medium">Tourist Guide Support</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="bg-purple-100 text-purple-600 rounded-full p-3 text-2xl"><i class="ri-wifi-line"></i></span>
+            <span class="text-lg font-medium">Free Wi-Fi</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="bg-gray-100 text-gray-600 rounded-full p-3 text-2xl"><i class="ri-parking-box-line"></i></span>
+            <span class="text-lg font-medium">Free Parking</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="bg-pink-100 text-pink-600 rounded-full p-3 text-2xl"><i class="ri-heart-2-line"></i></span>
+            <span class="text-lg font-medium">Pet Friendly</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="bg-blue-100 text-blue-400 rounded-full p-3 text-2xl"><i class="ri-t-shirt-air-line"></i></span>
+            <span class="text-lg font-medium">Laundry Service</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="bg-yellow-100 text-yellow-600 rounded-full p-3 text-2xl"><i class="ri-battery-charge-line"></i></span>
+            <span class="text-lg font-medium">Power Backup</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="bg-green-100 text-green-500 rounded-full p-3 text-2xl"><i class="ri-user-smile-line"></i></span>
+            <span class="text-lg font-medium">Friendly Staff</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="bg-purple-100 text-purple-500 rounded-full p-3 text-2xl"><i class="ri-drop-line"></i></span>
+            <span class="text-lg font-medium">Attached Bathrooms</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="bg-gray-100 text-gray-500 rounded-full p-3 text-2xl"><i class="ri-home-heart-line"></i></span>
+            <span class="text-lg font-medium">Family Friendly</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="pt-28 pb-16 bg-gray-50">
+    <h2 class="text-4xl font-bold text-pink-600 typewriter mb-8 text-center">Our Achievements</h2>
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-center">
+      <div class="bg-white rounded-3xl shadow-2xl p-12 flex flex-col items-center w-full md:w-1/3 mx-2">
+        <span class="text-5xl font-extrabold text-pink-600 mb-3 stats-bookings">100+</span>
+        <span class="text-gray-700 text-lg font-medium">Bookings Completed</span>
+      </div>
+      <div class="bg-white rounded-3xl shadow-2xl p-12 flex flex-col items-center w-full md:w-1/3 mx-2">
+        <span class="text-5xl font-extrabold text-pink-600 mb-3 stats-customers">150+</span>
+        <span class="text-gray-700 text-lg font-medium">Happy Customers</span>
+      </div>
+      <div id="ratingCard" class="bg-white rounded-3xl shadow-2xl p-12 flex flex-col items-center w-full md:w-1/3 mx-2 cursor-pointer hover:bg-pink-50 transition">
+        <span class="text-5xl font-extrabold text-pink-600 mb-3 stats-rating">4.9/5</span>
+        <span class="text-gray-700 text-lg font-medium">Average Rating</span>
+      </div>
+    </div>
+    
+    <!-- Reviews Modal -->
+    <div id="reviewsModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8 relative">
+        <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-pink-600 text-2xl">&times;</button>
+        <h3 class="text-2xl font-bold mb-4 text-pink-600">Guest Reviews</h3>
+        <ul class="space-y-4 text-gray-700 max-h-80 overflow-y-auto">
+          <li>
+            <span class="font-semibold">Amit S.:</span> "Amazing hospitality and beautiful location! Highly recommended."
+          </li>
+          <li>
+            <span class="font-semibold">Priya D.:</span> "Rooms were clean and the food was delicious. Will visit again!"
+          </li>
+          <li>
+            <span class="font-semibold">Rahul G.:</span> "Perfect getaway for families. The staff was very helpful."
+          </li>
+          <li>
+            <span class="font-semibold">Sneha M.:</span> "Loved the scenic views and peaceful environment."
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="pt-28 pb-20 px-4 md:px-16 bg-white">
+    <h2 class="text-4xl font-bold text-pink-600 typewriter mb-8 text-center">Contact Us</h2>
+    <div class="max-w-6xl mx-auto">
+      <div class="bg-white rounded-3xl shadow-2xl flex flex-col md:flex-row overflow-hidden">
+        <!-- Contact Info Card -->
+        <div class="bg-pink-600 text-white flex flex-col justify-between p-10 md:w-1/3 min-w-[280px]">
+          <div>
+            <h2 class="text-3xl font-bold mb-8">Contact Info</h2>
+            <ul class="space-y-7 text-lg">
+              <li class="flex items-start gap-4">
+                <span class="text-2xl"><i class="ri-map-pin-line"></i></span>
+                <span>Beside Barshal Water Tank,<br>Manpur, Barhanti,<br>West Bengal 723156</span>
+              </li>
+              <li class="flex items-start gap-4">
+                <span class="text-2xl"><i class="ri-mail-line"></i></span>
+                <span>kkghosh0099@gmail.com</span>
+              </li>
+              <li class="flex items-start gap-4">
+                <span class="text-2xl"><i class="ri-phone-line"></i></span>
+                <span>+91 9007062180</span>
+              </li>
+            </ul>
+          </div>
+          <div class="flex gap-6 mt-10 text-3xl">
+            <a href="#" class="hover:text-white"><i class="ri-facebook-fill"></i></a>
+            <a href="https://www.instagram.com/kingsukhguesthouse/" target="_blank" class="hover:text-white"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="hover:text-white"><i class="ri-twitter-x-line"></i></a>
+            <a href="#" class="hover:text-white"><i class="ri-linkedin-fill"></i></a>
+          </div>
+        </div>
+        
+        <!-- Contact Form Card -->
+        <div class="flex-1 p-10 flex flex-col justify-between">
+          <h2 class="text-3xl font-bold mb-8 text-pink-600 typewriter">Send a Message</h2>
+          <form class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <label class="block mb-2 font-medium text-gray-700">First Name</label>
+              <input type="text" class="w-full border-0 border-b-2 border-gray-300 focus:border-pink-500 outline-none py-2 bg-transparent" required />
+            </div>
+            <div>
+              <label class="block mb-2 font-medium text-gray-700">Last Name</label>
+              <input type="text" class="w-full border-0 border-b-2 border-gray-300 focus:border-pink-500 outline-none py-2 bg-transparent" required />
+            </div>
+            <div>
+              <label class="block mb-2 font-medium text-gray-700">Email Address</label>
+              <input type="email" class="w-full border-0 border-b-2 border-gray-300 focus:border-pink-500 outline-none py-2 bg-transparent" required />
+            </div>
+            <div>
+              <label class="block mb-2 font-medium text-gray-700">Mobile Number</label>
+              <input type="tel" class="w-full border-0 border-b-2 border-gray-300 focus:border-pink-500 outline-none py-2 bg-transparent" required />
+            </div>
+            <div class="md:col-span-2">
+              <label class="block mb-2 font-medium text-gray-700">Write your message here...</label>
+              <textarea class="w-full border-0 border-b-2 border-gray-300 focus:border-pink-500 outline-none py-2 bg-transparent resize-none" rows="4" required></textarea>
+            </div>
+            <div class="md:col-span-2 flex justify-start mt-4">
+              <button type="submit" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-14 rounded-2xl text-lg transition">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div><br>
+  </section>
+
+  <!-- Location Section -->
+  <section id="location" class="pt-28 pb-0 px-0 bg-gray-50">
+    <h2 class="text-4xl font-bold text-pink-600 typewriter mb-8 text-center">Location</h2>
+    <div class="max-w-4xl mx-auto py-10 text-center">
+      <ul class="space-y-3 text-lg mb-8">
+        <li>
+          <a href="https://maps.app.goo.gl/7wYUEB4tvR7NMHbcA" target="_blank" class="text-blue-600 underline">
+            Address: Beside Barshal Water Tank, Manpur, Barhanti, West Bengal 723156
+          </a>
+        </li>
+        <li>
+          <a href="mailto:kkghosh0099@gmail.com" class="text-blue-600 underline">kkghosh0099@gmail.com</a>
+        </li>
+        <li>
+          <a href="tel:+919007062180" class="text-blue-600 underline">+91 9007062180</a>
+        </li>
+      </ul>
+    </div>
+    <div class="w-full">
+      <iframe src="https://www.google.com/maps?q=Kingsukh+Guest+House,+Barhanti,+West+Bengal+723156&output=embed" width="100%" height="400" style="border:0; border-radius:0; display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white pt-28 pb-12 px-4 md:px-16">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-pink-400 typewriter mb-4">King Sukh Guest House</h2>
+    </div>
+    <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-8">
+      <div>
+        <h4 class="font-bold text-lg mb-4 typewriter">King Sukh Guest House</h4>
+        <p>Comfort, tranquility, and nature's beauty in one place.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3 typewriter">Quick Links</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#rooms" class="hover:underline">Rooms</a></li>
+          <li><a href="#about" class="hover:underline">About</a></li>
+          <li><a href="#contact" class="hover:underline">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3 typewriter">Services</h4>
+        <ul class="space-y-2 text-sm">
+          <li>24/7 Room Service</li>
+          <li>Restaurant & Dining</li>
+          <li>Tourist Guide Support</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3 typewriter">Contact</h4>
+        <p class="text-sm">
+          📍 Barhanti, Purulia, WB<br>
+          📞 <a href="tel:+919007062180" class="text-blue-400">+91 9007062180</a><br>
+          📧 <a href="mailto:kkghosh0099@gmail.com" class="text-blue-400">kkghosh0099@gmail.com</a>
+        </p>
+      </div>
+    </div>
+    <div class="text-center text-sm mt-10 border-t border-gray-700 pt-4">
+      © 2024 King Sukh Guest House. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Chat Support Section -->
+  <div id="chatbotSupport" class="fixed bottom-6 right-6 z-50">
+    <!-- Chatbot Button -->
+    <button id="openChatbot" class="bg-pink-600 hover:bg-pink-700 text-white rounded-full shadow-lg w-16 h-16 flex items-center justify-center text-3xl focus:outline-none">
+      <i class="ri-chat-3-line"></i>
+    </button>
+    <!-- Chatbot Window -->
+    <div id="chatbotWindow" class="hidden flex flex-col bg-white rounded-2xl shadow-2xl w-80 max-w-full h-96 fixed bottom-24 right-0 border border-gray-200">
+      <div class="flex items-center justify-between px-4 py-3 bg-pink-600 rounded-t-2xl">
+        <span class="text-white font-bold text-lg">Support Chat</span>
+        <button id="closeChatbot" class="text-white text-2xl hover:text-gray-200">&times;</button>
+      </div>
+      <div id="chatMessages" class="flex-1 px-4 py-3 overflow-y-auto text-sm space-y-3 bg-gray-50">
+        <div class="text-gray-700 mb-2">👋 Hello and welcome! How can I make your stay or booking experience better today? Select a question below or type your own!</div>
+        <div class="flex flex-col gap-2" id="quickQuestions">
+          <button class="chat-question bg-pink-100 text-pink-700 rounded-xl px-3 py-2 text-left hover:bg-pink-200 transition" data-answer="We offer Cozy Haven Room (₹1000/night), Spacious Serenity Suite (₹1500/night), and Deluxe Family Room (₹1800/night). All rooms have attached bathrooms, free Wi-Fi, and comfortable beds. Would you like to know more about any room or see photos?">What rooms are available?</button>
+          <button class="chat-question bg-pink-100 text-pink-700 rounded-xl px-3 py-2 text-left hover:bg-pink-200 transition" data-answer="Our services include 24/7 room service, restaurant & dining, tourist guide support, high-class security, and more. Want details about any service?">What services do you provide?</button>
+          <button class="chat-question bg-pink-100 text-pink-700 rounded-xl px-3 py-2 text-left hover:bg-pink-200 transition" data-answer="Yes, we offer free high-speed Wi-Fi in all rooms and public areas. Need the password or help connecting?">Is Wi-Fi available?</button>
+          <button class="chat-question bg-pink-100 text-pink-700 rounded-xl px-3 py-2 text-left hover:bg-pink-200 transition" data-answer="Our restaurant serves delicious local and multi-cuisine dishes. Room service is available 24/7. Would you like to see our menu or know about special dishes?">Do you have food or restaurant service?</button>
+          <button class="chat-question bg-pink-100 text-pink-700 rounded-xl px-3 py-2 text-left hover:bg-pink-200 transition" data-answer="Yes, we have secure parking available for guests at no extra charge. Need parking directions?">Is parking available?</button>
+          <button class="chat-question bg-pink-100 text-pink-700 rounded-xl px-3 py-2 text-left hover:bg-pink-200 transition" data-answer="We are pet-friendly! Please let us know in advance if you are bringing a pet so we can make your stay comfortable.">Are pets allowed?</button>
+          <button class="chat-question bg-pink-100 text-pink-700 rounded-xl px-3 py-2 text-left hover:bg-pink-200 transition" data-answer="We accept cash, UPI, and most major credit/debit cards. Need help with payment or invoice?">What payment methods do you accept?</button>
+          <button class="chat-question bg-pink-100 text-pink-700 rounded-xl px-3 py-2 text-left hover:bg-pink-200 transition" data-answer="You can cancel or modify your booking by contacting us directly. Flexible cancellation is available for most bookings. Want to request a change now?">How can I cancel or change my booking?</button>
+          <button class="chat-question bg-pink-100 text-pink-700 rounded-xl px-3 py-2 text-left hover:bg-pink-200 transition" data-answer="You can book a room by clicking the 'Book Now' button on our website or by calling +91 9007062180. Need help with booking? Just ask!">How do I book a room?</button>
+          <button class="chat-question bg-pink-100 text-pink-700 rounded-xl px-3 py-2 text-left hover:bg-pink-200 transition" data-answer="We are located beside Barshal Water Tank, Manpur, Barhanti, West Bengal 723156. Check the 'Find Us' section for a map. Need directions? I'm here to help!">Where is King Sukh Guest House located?</button>
+          <button class="chat-question bg-pink-100 text-pink-700 rounded-xl px-3 py-2 text-left hover:bg-pink-200 transition" data-answer="Check-in is from 12:00 PM and check-out is until 11:00 AM. Early check-in/late check-out may be available on request. Want to request a special time? Let me know!">What are the check-in and check-out times?</button>
+          <button class="chat-question bg-yellow-100 text-yellow-700 rounded-xl px-3 py-2 text-left hover:bg-yellow-200 transition font-semibold" data-answer="No worries! Please share your contact number or click below to request a callback from our team.">Need more help? Request a callback!</button>
+        </div>
+      </div>
+      <form id="chatform" class="px-4 py-3 bg-white border-t border-gray-200 flex gap-2">
+        <input id="chatInput" type="text" class="w-full rounded-xl border border-gray-300 px-3 py-2 text-sm focus:border-pink-500 outline-none" placeholder="Type your question..." autocomplete="off" />
+        <button type="submit" class="bg-pink-600 hover:bg-pink-700 text-white rounded-xl px-4 py-2 font-semibold">Send</button>
+        <button type="button" id="clearChat" class="ml-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-xl px-3 py-2 font-semibold">Clear</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggle with animation
+    const menuBtn = document.getElementById("menuBtn");
+    const navMenu = document.getElementById("navMenu");
+    const menuIcon = document.getElementById("menuIcon");
+
+    menuBtn.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+      navMenu.classList.toggle("hidden");
+      if (navMenu.classList.contains("active")) {
+        menuIcon.classList.remove("ri-menu-line");
+        menuIcon.classList.add("ri-close-line");
+      } else {
+        menuIcon.classList.remove("ri-close-line");
+        menuIcon.classList.add("ri-menu-line");
+      }
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll("#navMenu a").forEach(link => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+        navMenu.classList.add("hidden");
+        menuIcon.classList.remove("ri-close-line");
+        menuIcon.classList.add("ri-menu-line");
+      });
+    });
+
+    // Gallery Carousel Logic
+    const galleryImages = [
+      '1.jpg',
+      'ayodhya.webp',
+      'baranti.webp',
+      'flower.jpg',
+      'header.jpg',
+      'large.jpg',
+      'mithonDam.webp',
+      'out.jpg',
+      'palash.webp',
+      'recep.jpg',
+      'room1.jpg',
+      'service.jpg',
+      'small.jpg'
+    ];
+    let currentIndex = 0;
+    const carouselImage = document.getElementById('carouselImage');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const carouselDots = document.getElementById('carouselDots');
+
+    function updateCarousel(index) {
+      carouselImage.src = galleryImages[index];
+      // Update dots
+      Array.from(carouselDots.children).forEach((dot, i) => {
+        dot.classList.toggle('bg-green-600', i === index);
+        dot.classList.toggle('bg-gray-300', i !== index);
+      });
+    }
+
+    // Create dots
+    galleryImages.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'w-3 h-3 rounded-full bg-gray-300 focus:outline-none';
+      dot.addEventListener('click', () => {
+        currentIndex = i;
+        updateCarousel(currentIndex);
+      });
+      carouselDots.appendChild(dot);
+    });
+    updateCarousel(currentIndex);
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      updateCarousel(currentIndex);
+    });
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      updateCarousel(currentIndex);
+    });
+    // Auto-slide every 5 seconds
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      updateCarousel(currentIndex);
+    }, 5000);
+
+    // Gallery modal logic
+    document.addEventListener('DOMContentLoaded', function() {
+      const galleryImgs = document.querySelectorAll('.gallery-img-modal img');
+      const galleryModal = document.getElementById('galleryModal');
+      const modalImg = document.getElementById('modalImg');
+      const closeGalleryModal = document.getElementById('closeGalleryModal');
+      const zoomInBtn = document.getElementById('zoomInBtn');
+      const zoomOutBtn = document.getElementById('zoomOutBtn');
+      let zoom = 1;
+
+      galleryImgs.forEach(img => {
+        img.addEventListener('click', () => {
+          modalImg.src = img.getAttribute('data-img');
+          zoom = 1;
+          modalImg.style.transform = 'scale(1)';
+          galleryModal.classList.remove('hidden');
+        });
+      });
+      closeGalleryModal.addEventListener('click', () => {
+        galleryModal.classList.add('hidden');
+      });
+      galleryModal.addEventListener('click', (e) => {
+        if (e.target === galleryModal) {
+          galleryModal.classList.add('hidden');
+        }
+      });
+      zoomInBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        zoom = Math.min(zoom + 0.2, 2.5);
+        modalImg.style.transform = `scale(${zoom})`;
+      });
+      zoomOutBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        zoom = Math.max(zoom - 0.2, 1);
+        modalImg.style.transform = `scale(${zoom})`;
+      });
+    });
+
+    // Reviews modal logic
+    document.addEventListener('DOMContentLoaded', function() {
+      const ratingCard = document.getElementById('ratingCard');
+      const reviewsModal = document.getElementById('reviewsModal');
+      const closeModal = document.getElementById('closeModal');
+      ratingCard.addEventListener('click', () => {
+        reviewsModal.classList.remove('hidden');
+      });
+      closeModal.addEventListener('click', () => {
+        reviewsModal.classList.add('hidden');
+      });
+      reviewsModal.addEventListener('click', (e) => {
+        if (e.target === reviewsModal) {
+          reviewsModal.classList.add('hidden');
+        }
+      });
+    });
+
+    // Chatbot logic
+    document.addEventListener('DOMContentLoaded', function() {
+      const openChatbot = document.getElementById('openChatbot');
+      const closeChatbot = document.getElementById('closeChatbot');
+      const chatbotWindow = document.getElementById('chatbotWindow');
+      const chatMessages = document.getElementById('chatMessages');
+      const chatQuestions = document.querySelectorAll('.chat-question');
+      const chatInput = document.getElementById('chatInput');
+      const chatForm = document.getElementById('chatform');
+      const clearChat = document.getElementById('clearChat');
+
+      // Preloaded Q&A for matching
+      const preloadedQA = [
+        {
+          question: 'What rooms are available?',
+          answer: 'We offer Cozy Haven Room (₹1000/night), Spacious Serenity Suite (₹1500/night), and Deluxe Family Room (₹1800/night). All rooms have attached bathrooms, free Wi-Fi, and comfortable beds. Would you like to know more about any room or see photos?'
+        },
+        {
+          question: 'What services do you provide?',
+          answer: 'Our services include 24/7 room service, restaurant & dining, tourist guide support, high-class security, and more. Want details about any service?'
+        },
+        {
+          question: 'Is Wi-Fi available?',
+          answer: 'Yes, we offer free high-speed Wi-Fi in all rooms and public areas. Need the password or help connecting?'
+        },
+        {
+          question: 'Do you have food or restaurant service?',
+          answer: 'Our restaurant serves delicious local and multi-cuisine dishes. Room service is available 24/7. Would you like to see our menu or know about special dishes?'
+        },
+        {
+          question: 'Is parking available?',
+          answer: 'Yes, we have secure parking available for guests at no extra charge. Need parking directions?'
+        },
+        {
+          question: 'Are pets allowed?',
+          answer: 'We are pet-friendly! Please let us know in advance if you are bringing a pet so we can make your stay comfortable.'
+        },
+        {
+          question: 'What payment methods do you accept?',
+          answer: 'We accept cash, UPI, and most major credit/debit cards. Need help with payment or invoice?'
+        },
+        {
+          question: 'How can I cancel or change my booking?',
+          answer: 'You can cancel or modify your booking by contacting us directly. Flexible cancellation is available for most bookings. Want to request a change now?'
+        },
+        {
+          question: 'How do I book a room?',
+          answer: "You can book a room by clicking the 'Book Now' button on our website or by calling +91 9007062180. Need help with booking? Just ask!"
+        },
+        {
+          question: 'Where is King Sukh Guest House located?',
+          answer: "We are located beside Barshal Water Tank, Manpur, Barhanti, West Bengal 723156. Check the 'Find Us' section for a map. Need directions? I'm here to help!"
+        },
+        {
+          question: 'What are the check-in and check-out times?',
+          answer: 'Check-in is from 12:00 PM and check-out is until 11:00 AM. Early check-in/late check-out may be available on request. Want to request a special time? Let me know!'
+        },
+        {
+          question: 'Need more help? Request a callback!',
+          answer: "No worries! Please share your contact number or click below to request a callback from our team. We'll get in touch as soon as possible!"
+        }
+      ];
+
+      function findBestAnswer(userInput) {
+        const input = userInput.trim().toLowerCase();
+        let bestScore = 0;
+        let bestAnswer = null;
+        preloadedQA.forEach(({question, answer}) => {
+          const q = question.toLowerCase();
+          // Direct substring match
+          if (input === q) {
+            bestScore = 100;
+            bestAnswer = answer;
+            return;
+          }
+          // Keyword overlap score
+          let score = 0;
+          const inputWords = input.split(/\s+/);
+          inputWords.forEach(word => {
+            if (q.includes(word) && word.length > 2) score++;
+          });
+          if (score > bestScore) {
+            bestScore = score;
+            bestAnswer = answer;
+          }
+        });
+        // If at least 2 keyword matches or direct match, consider it a match
+        if (bestScore >= 2 || bestScore === 100) return bestAnswer;
+        return null;
+      }
+
+      openChatbot.addEventListener('click', () => {
+        chatbotWindow.classList.remove('hidden');
+        openChatbot.classList.add('hidden');
+        chatInput.focus();
+      });
+      closeChatbot.addEventListener('click', () => {
+        chatbotWindow.classList.add('hidden');
+        openChatbot.classList.remove('hidden');
+      });
+      chatQuestions.forEach(btn => {
+        btn.addEventListener('click', function() {
+          addUserMessage(this.textContent);
+          showTyping(() => addBotMessage(this.getAttribute('data-answer')));
+        });
+      });
+      chatForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const value = chatInput.value.trim();
+        if (value) {
+          addUserMessage(value);
+          showTyping(() => {
+            const matched = findBestAnswer(value);
+            if (matched) {
+              addBotMessage(matched);
+              if (matched.includes('callback')) {
+                addBotMessage('<button id="requestCallbackBtn" class="mt-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl px-4 py-2 font-semibold">Request Callback</button>');
+                setTimeout(() => {
+                  const btn = document.getElementById('requestCallbackBtn');
+                  if (btn) {
+                    btn.onclick = function() {
+                      addBotMessage('Thank you! Our team will contact you soon. If urgent, call <a href="tel:+919007062180" class="text-blue-600 underline">+91 9007062180</a>.');
+                    };
+                  }
+                }, 100);
+              }
+            } else {
+              addBotMessage("I'm not sure about that, but your question is important to us! You can call <a href='tel:+919007062180' class='text-blue-600 underline'>+91 9007062180</a>, email <a href='mailto:kkghosh0099@gmail.com' class='text-blue-600 underline'>kkghosh0099@gmail.com</a>, or <button id='requestCallbackBtn' class='bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl px-2 py-1 ml-1'>request a callback</button> for a quick response.");
+              setTimeout(() => {
+                const btn = document.getElementById('requestCallbackBtn');
+                if (btn) {
+                  btn.onclick = function() {
+                    addBotMessage('Thank you! Our team will contact you soon. If urgent, call <a href="tel:+919007062180" class="text-blue-600 underline">+91 9007062180</a>.');
+                  };
+                }
+              }, 100);
+            }
+          });
+          chatInput.value = '';
+        }
+      });
+      clearChat.addEventListener('click', function() {
+        chatMessages.innerHTML = '<div class="text-gray-700 mb-2">👋 Hello and welcome! How can I make your stay or booking experience better today? Select a question below or type your own!</div>' + document.getElementById('quickQuestions').outerHTML;
+      });
+      function addUserMessage(msg) {
+        const userMsg = document.createElement('div');
+        userMsg.className = 'text-right text-pink-600';
+        userMsg.textContent = msg;
+        chatMessages.appendChild(userMsg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+      function addBotMessage(msg) {
+        const botMsg = document.createElement('div');
+        botMsg.className = 'text-left text-gray-700 bg-gray-100 rounded-xl px-3 py-2 mt-1';
+        botMsg.innerHTML = msg;
+        chatMessages.appendChild(botMsg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+      function showTyping(callback) {
+        const typingMsg = document.createElement('div');
+        typingMsg.className = 'text-left text-gray-400 italic';
+        typingMsg.textContent = 'King Sukh Bot is typing...';
+        chatMessages.appendChild(typingMsg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        setTimeout(() => {
+          chatMessages.removeChild(typingMsg);
+          callback();
+        }, 700);
+      }
+    });
+
+    // Sticky Book Now Button (Mobile Only)
+    const bookNowBtn = document.createElement('a');
+    bookNowBtn.href = 'https://wa.link/at5ion';
+    bookNowBtn.className = 'fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-green-600 text-white px-8 py-3 rounded-full shadow-lg text-lg font-bold transition hover:bg-green-700 md:hidden';
+    bookNowBtn.textContent = 'Book Now';
+    document.body.appendChild(bookNowBtn);
+
+    // Scroll-to-Top Button
+    const scrollTopBtn = document.createElement('button');
+    scrollTopBtn.id = 'scrollTopBtn';
+    scrollTopBtn.className = 'hidden fixed bottom-20 right-6 z-50 bg-pink-600 text-white p-3 rounded-full shadow-lg text-2xl hover:bg-pink-700 transition';
+    scrollTopBtn.innerHTML = '↑';
+    document.body.appendChild(scrollTopBtn);
+    window.addEventListener('scroll', function() {
+      scrollTopBtn.classList.toggle('hidden', window.scrollY < 200);
+    });
+    scrollTopBtn.onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+  </script>
+</body>
+</html>
